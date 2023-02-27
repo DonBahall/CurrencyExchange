@@ -2,10 +2,11 @@
 Currency exchange
 A program written that takes real data from api (https://api.nbp.pl) parses it and returns a response in the required currency
 
-Used technologies
+Used technologies:
+
 SpringBoot,HTML,CSS,JS,Ajax
 
-Instructions for use
+Instructions for use:
 
 1) Run the project
 2) Open the project on the page http://localhost:8080/
