@@ -1,4 +1,10 @@
 # CurrencyExchange
+Currency exchange
+A program written that takes real data from api (https://api.nbp.pl) parses it and returns a response in the required currency
+
+Used technologies
+SpringBoot,HTML,CSS,JS,Ajax
+
 Instructions for use
 
 1) Run the project
