@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org" lang="">
+<head>
+    <meta charset="UTF-8">
+    <title>Exchange</title>
+    <link href="/css/dropdown.css" rel="stylesheet" type="text/css">
+    <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js'></script>
+
+</head>
+<body>
+<div>
+    <div class="dropdown">
+        <button onclick="myFunction()" class="dropbtn" id="bnt">EUR</button>
+        <div id="myDropdown" class="dropdown-content">
+            <div th:each="elements : ${money}">
+                <a href='#' class="currency" th:text="${elements}"></a>
+            </div>
+        </div>
+    </div>
+    <input pattern="[0-9\.]+" id="amount" class="ans" title="input value">
+    <p></p>
+    <div class="dropdown">
+        <button onclick="secondDrop()" class="dropbtn" id="bnt2">USD</button>
+        <div id="myDropdown2" class="dropdown-content">
+            <div th:each="elements : ${money}">
+                <a href='#' class="currency" th:text="${elements}"></a>
+            </div>
+        </div>
+    </div>
+    <input disabled id="calc" title="output">
+</div>
+<script>
+    function myFunction() {
+        document.getElementById("myDropdown").classList.toggle("show");
+    }
+
+    function secondDrop() {
+        document.getElementById("myDropdown2").classList.toggle("show");
+    }
+
+    window.onclick = function (event) {
+        if (!event.target.matches('.dropbtn')) {
+            let dropdowns = document.getElementsByClassName("dropdown-content");
+            for (let i = 0; i < dropdowns.length; i++) {
+                let openDropdown = dropdowns[i];
+                if (openDropdown.classList.contains('show')) {
+                    openDropdown.classList.remove('show');
+                }
+            }
+        }
+    }
+
+    $(document).ready(function () {
+        $('.currency').on('click', function () {
+            let btn = $(this).parents('.dropdown').find('.dropbtn');
+            btn.html($(this).text());
+        });
+
+        $('.ans').on('change', function () {
+            $.post('/count', {
+                from: $("#bnt").text(),
+                to: $("#bnt2").text(),
+                amount: $("#amount").val()
+            }, function (data) {
+                $("#calc").val(data)
+            })
+        });
+    })
+</script>
+</body>
+</html>
