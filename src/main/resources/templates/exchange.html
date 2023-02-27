@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <input pattern="[0-9\.]+" id="amount" class="ans" title="input value">
+    <input id="amount" class="ans" title="input value">
     <p></p>
     <div class="dropdown">
         <button onclick="secondDrop()" class="dropbtn" id="bnt2">USD</button>
@@ -28,7 +28,7 @@
             </div>
         </div>
     </div>
-    <input disabled id="calc" title="output">
+    <input id="calc" class="ans2" title="output">
 </div>
 <script>
     function myFunction() {
@@ -64,6 +64,15 @@
                 amount: $("#amount").val()
             }, function (data) {
                 $("#calc").val(data)
+            })
+        });
+        $('.ans2').on('change', function () {
+            $.post('/count', {
+                from: $("#bnt").text(),
+                to: $("#bnt2").text(),
+                amount: $("#calc").val()
+            }, function (data) {
+                $("#amount").val(data)
             })
         });
     })
